@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Subject:</strong>
+  <%= @course.subject.name + ' (' + @course.subject.study_path + ')' %>
+</p>
+<p>
+  <strong>Lecturer:</strong>
+  <%= @course.lecturer.title + ' ' + @course.lecturer.name %>
+</p>
+<p>
   <strong>Description:</strong>
   <%= @course.description %>
 </p>
