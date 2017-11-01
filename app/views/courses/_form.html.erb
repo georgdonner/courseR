@@ -16,6 +16,18 @@
     <%= form.text_area :description, id: :course_description %>
   </div>
 
+  <div class="field">
+    <%= form.label :lecturer %><br />
+    <%= form.select :lecturer_id, options_from_collection_for_select(Lecturer.all, "id", "name"),
+      :prompt => "Select lecturer" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subject %><br />
+    <%= form.select :subject_id, options_from_collection_for_select(Subject.all, "id", "name"),
+      :prompt => "Select subject" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
