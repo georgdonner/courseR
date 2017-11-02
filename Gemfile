@@ -42,6 +42,10 @@ group :development, :test do
   gem 'launchy'
   # Use Rspec for unit testing
   gem 'rspec-rails', '~> 3.6'
+  # Use Bootstrap for CSS-Styling
+  gem 'bootstrap', '~> 4.0.0.beta2.1'
+  # Use jQuery for Bootstrap
+  gem 'jquery-rails'
 end
 
 group :development do
