@@ -2,26 +2,28 @@
 
 <h1>Subjects</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Study path</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @subjects.each do |subject| %>
+<div class="table-responsive-lg mt-4">
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
-        <td><%= link_to subject.name, subject %></td>
-        <td><%= subject.study_path %></td>
-        <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
-        <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Study path</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+  
+    <tbody>
+      <% @subjects.each do |subject| %>
+        <tr>
+          <td><%= link_to subject.name, subject %></td>
+          <td><%= subject.study_path %></td>
+          <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
+          <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
