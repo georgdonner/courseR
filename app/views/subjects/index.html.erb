@@ -1,9 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="container m-3">
+  <p id="notice"><%= notice %></p>
+  <header class="row">
+    <div class="col-sm-4">
+      <div class="row" >IMI</div>
+      <div class="row" >CourseR</div>
+    </div>
+    <div class="col-sm-4 input-group stylish-input-group">
+        <input type="text" class="form-control"  placeholder="Search" >
+        <span class="input-group-addon">
+                <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="col-sm-4">
+      <button class="login btn btn-success">Login</button>
+    </div>
+  </header>
 
-<h1>Subjects</h1>
+  <h1 class="mt-5">Subjects<span class="glyphicon glyphicon-search"></span></h1>
 
-<div class="table-responsive-lg mt-4">
-  <table class="table">
+  <table class="table table-responsive-lg table-bordered table-hover mt-4">
     <thead class="thead-dark">
       <tr>
         <th>Name</th>
@@ -23,8 +38,8 @@
       <% end %>
     </tbody>
   </table>
+
+  <br>
+
+  <%= link_to 'New Subject', new_subject_path %>
 </div>
-
-<br>
-
-<%= link_to 'New Subject', new_subject_path %>
