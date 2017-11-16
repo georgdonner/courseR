@@ -1,5 +1,5 @@
 class LecturersController < ApplicationController
-  before_action :set_lecturer, only: [:show, :edit, :update, :destroy]
+
 
   # GET /lecturers
   # GET /lecturers.json
