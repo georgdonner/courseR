@@ -11,7 +11,11 @@
         </span>
     </div>
     <div class="col-sm-4">
-      <button class="login btn btn-success actions">Login</button>
+        <% if user_signed_in? %>
+          <%= button_to('Logout', destroy_user_session_path, method: :delete, :class => "login btn btn-danger actions" ) %>
+        <% else %>
+          <%= button_to('Login', new_user_session_path, :class => "login btn btn-success actions")  %>
+        <% end %>
     </div>
   </header>
 
@@ -45,9 +49,6 @@
           <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
-      <section>
-        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-      </section>
     </tbody>
   </table>
 
