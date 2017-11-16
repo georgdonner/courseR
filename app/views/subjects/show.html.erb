@@ -10,5 +10,17 @@
   <%= @subject.study_path %>
 </p>
 
+<p>
+  <strong>Semester:</strong>
+  <%= @subject.semester_info %>
+</p>
+
+<p>
+  <% @subject.courses.each do |course| %>
+    <p><strong>Lecturer:</strong> <%= course.lecturer.title %> <%= course.lecturer.name %></p>
+    <p><strong>Description:</strong> <%= course.description %></p>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <%= link_to 'Back', subjects_path %>

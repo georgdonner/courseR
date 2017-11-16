@@ -11,6 +11,8 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
+    @courses = @subject.courses
+    @selected_course = @courses.first
   end
 
   # GET /subjects/new
