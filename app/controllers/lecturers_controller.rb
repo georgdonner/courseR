@@ -1,6 +1,5 @@
 class LecturersController < ApplicationController
-  before_action :set_lecturer, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+
 
   # GET /lecturers
   # GET /lecturers.json

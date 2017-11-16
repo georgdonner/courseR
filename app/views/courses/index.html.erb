@@ -12,7 +12,7 @@
         <th colspan="3"></th>
       </tr>
     </thead>
-  
+
     <tbody>
       <% @courses.each do |course| %>
         <tr>
@@ -24,6 +24,9 @@
           <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
+      <section>
+        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+      </section>  
     </tbody>
   </table>
 </div>

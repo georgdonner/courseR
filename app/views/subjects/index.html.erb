@@ -1,5 +1,4 @@
 <div class="container m-3">
-  <p id="notice"><%= notice %></p>
   <header class="row">
     <div class="col-sm-4">
       <div class="row" >IMI</div>
@@ -12,7 +11,7 @@
         </span>
     </div>
     <div class="col-sm-4">
-      <button class="login btn btn-success">Login</button>
+      <button class="login btn btn-success actions">Login</button>
     </div>
   </header>
 
@@ -36,6 +35,9 @@
           <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
+      <section>
+        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+      </section>
     </tbody>
   </table>
 
