@@ -1,26 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @subject.name %>
-</p>
+<div class="container mt-4">
+  <p>
+    <h1><%= @subject.name %><small> (<%= @subject.semester_info %>) </small></h1>
+  </p>
 
-<p>
-  <strong>Study path:</strong>
-  <%= @subject.study_path %>
-</p>
+  <p class="mb-5">
+    <strong>Study path:</strong>
+    <%= @subject.study_path %>
+  </p>
 
-<p>
-  <strong>Semester:</strong>
-  <%= @subject.semester_info %>
-</p>
-
-<p>
-  <% @subject.courses.each do |course| %>
-    <p><strong>Lecturer:</strong> <%= course.lecturer.title %> <%= course.lecturer.name %></p>
-    <p><strong>Description:</strong> <%= course.description %></p>
-  <% end %>
-</p>
-
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
-<%= link_to 'Back', subjects_path %>
+  <nav class="nav nav-tabs" id="myTab" role="tablist">
+    <% @subject.courses.each do |course| %>
+      <a class="nav-item nav-link"  id="<%= course.id %>-tab" data-toggle="tab" href="#<%= course.id %>" role="tab" aria-controls="#<%= course.id %>" aria-selected="false"><%= course.lecturer.title %> <%= course.lecturer.name %></a>
+    <% end %>
+  </nav>
+  <div class="tab-content mx-4" id="nav-tabContent">
+    <% @subject.courses.each do |course| %>
+      <div class="tab-pane fade" id="<%= course.id %>" role="tabpanel" aria-labelledby="<%= course.id %>-tab">
+        <h3 class="mt-5 mb-2">Description </h3>
+        <p><%= course.description %></p>
+      </div>
+    <% end %>
+    </br>
+  </div>
+</div>
