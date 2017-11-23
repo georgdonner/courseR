@@ -12,12 +12,12 @@
 
   <nav class="nav nav-tabs" id="myTab" role="tablist">
     <% @subject.courses.each do |course| %>
-      <a class="nav-item nav-link"  id="<%= course.id %>-tab" data-toggle="tab" href="#<%= course.id %>" role="tab" aria-controls="#<%= course.id %>" aria-selected="false"><%= course.lecturer.title %> <%= course.lecturer.name %></a>
+      <a class="nav-item nav-link <%= is_active(course) %>"  id="<%= generate_tab_id(course) %>" data-toggle="tab" href="#<%= course.id %>" role="tab" aria-controls="#<%= course.id %>" aria-selected="false"><%= course.lecturer.title %> <%= course.lecturer.name %></a>
     <% end %>
   </nav>
   <div class="tab-content mx-4" id="nav-tabContent">
     <% @subject.courses.each do |course| %>
-      <div class="tab-pane fade" id="<%= course.id %>" role="tabpanel" aria-labelledby="<%= course.id %>-tab">
+      <div class="tab-pane <%= is_active(course) %>" id="<%= course.id %>" role="tabpanel" aria-labelledby="<%= generate_tab_id(course) %>">
         <h3 class="mt-5 mb-2">Description </h3>
         <p><%= course.description %></p>
       </div>
