@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20171109111517) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "courses", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "subject_id"
-    t.integer "lecturer_id"
+    t.bigint "subject_id"
+    t.bigint "lecturer_id"
     t.index ["lecturer_id"], name: "index_courses_on_lecturer_id"
     t.index ["subject_id"], name: "index_courses_on_subject_id"
   end
@@ -56,4 +59,6 @@ ActiveRecord::Schema.define(version: 20171109111517) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "courses", "lecturers"
+  add_foreign_key "courses", "subjects"
 end
