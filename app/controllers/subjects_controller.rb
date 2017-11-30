@@ -5,7 +5,13 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.all
+    if params[:semester_info]
+      @semester_info = Subject.find(params[:semester_info])
+      @subjects = Subject.where(semester_info: @semester_info)
+    else
+      @subjects = Subject.all
+    end
+
   end
 
   # GET /subjects/1
