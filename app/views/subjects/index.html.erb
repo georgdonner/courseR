@@ -1,40 +1,55 @@
 <div class="container my-3">
+  <div class="row justify-content-md-center">
+    <section class="search-form col-lg-5">
+      <%= form_for :subjects, method: :get do |f| %>
+        <div class="input-group input-group-lg">
+          <%= label_tag :keywords, nil, class: "sr-only" %>
+          <%= text_field_tag :keywords, nil,
+              placeholder: "Type in a subject name...",
+              class: "form-control input-lg" %>
+          <%= button_tag(:class => "input-group-addon") do %>
+            <i class="fa fa-search" aria-hidden="true"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  </div>
   <h1 class="mt-5">Subjects</h1>
 
    <div class="btn-group my-4">
-    <button type="button" class="btn btn-default">Semester 1</button>
-    <button type="button" class="btn btn-default">Semester 2</button>
-    <button type="button" class="btn btn-default">Semester 3</button>
-    <button type="button" class="btn btn-default">Semester 4</button>
-    <button type="button" class="btn btn-default">Semester 5</button>
-    <button type="button" class="btn btn-default">Semester 6</button>
-    <button type="button" class="btn btn-default">AWE</button>
-  </div> 
-
-  <div class="row">
-  <table class="table table-responsive-lg table-bordered table-hover mt- col-1">
-    <thead class="thead-dark">
-      <tr>
-        <th>Name</th>
-        <th>Study path</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @subjects.each do |subject| %>
-        <tr>
-          <td><%= link_to subject.name, subject %></td>
-          <td><%= subject.study_path %></td>
-          <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
-          <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <button type="button" class="btn btn-default"><%= link_to 'All', subjects_path()%></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Semester 1', subjects_path(:semester_info => '1')%></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Semester 2', subjects_path(:semester_info => '2')%></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Semester 3', subjects_path(:semester_info => '3')%></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Semester 4', subjects_path(:semester_info => '4')%></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Semester 5', subjects_path(:semester_info => '5')%></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Semester 6', subjects_path(:semester_info => '6')%></button>
+    <button type="button" class="btn btn-default"><%= link_to 'AWE', subjects_path(:semester_info => 'AWE')%></button>
   </div>
+
+
+  <section class="search-results row">
+    <table class="table table-responsive-lg table-bordered table-hover mt- col-1">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Study path</th>
+          <th>Semester type</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @subjects.each do |subject| %>
+          <tr>
+            <td><%= link_to subject.name, subject %></td>
+            <td><%= subject.study_path %></td>
+            <td><%= subject.semester_info %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
 
   <br>
 
-  <%= link_to 'New Subject', new_subject_path %>
 </div>

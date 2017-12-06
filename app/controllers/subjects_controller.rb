@@ -5,7 +5,21 @@ class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.all
+    if params[:keywords].present?
+      @keywords = params[:keywords]
+      subject_search_term = SubjectSearchTerm.new(@keywords)
+      @subjects = Subject.where(
+        subject_search_term.where_clause,
+        subject_search_term.where_args).
+        order(subject_search_term.order)
+    else
+      if params[:semester_info]
+        @semester_info = Subject.find(params[:semester_info])
+        @subjects = Subject.where(semester_info: @semester_info)
+      else
+        @subjects = Subject.all
+      end
+    end
   end
 
   # GET /subjects/1
