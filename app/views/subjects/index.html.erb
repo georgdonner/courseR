@@ -17,14 +17,14 @@
   <h1 class="mt-5">Subjects</h1>
 
    <div class="btn-group my-4">
-    <button type="button" class="btn btn-default"><%= link_to 'All', subjects_path()%></button>
-    <button type="button" class="btn btn-default"><%= link_to 'Semester 1', subjects_path(:semester_info => '1')%></button>
-    <button type="button" class="btn btn-default"><%= link_to 'Semester 2', subjects_path(:semester_info => '2')%></button>
-    <button type="button" class="btn btn-default"><%= link_to 'Semester 3', subjects_path(:semester_info => '3')%></button>
-    <button type="button" class="btn btn-default"><%= link_to 'Semester 4', subjects_path(:semester_info => '4')%></button>
-    <button type="button" class="btn btn-default"><%= link_to 'Semester 5', subjects_path(:semester_info => '5')%></button>
-    <button type="button" class="btn btn-default"><%= link_to 'Semester 6', subjects_path(:semester_info => '6')%></button>
-    <button type="button" class="btn btn-default"><%= link_to 'AWE', subjects_path(:semester_info => 'AWE')%></button>
+    <%= link_to 'All', subjects_path(), :class => "btn btn-default" %>
+    <%= link_to 'Semester 1', subjects_path(:semester_info => '1'), :class => "btn btn-default" %>
+    <%= link_to 'Semester 2', subjects_path(:semester_info => '2'), :class => "btn btn-default" %>
+    <%= link_to 'Semester 3', subjects_path(:semester_info => '3'), :class => "btn btn-default" %>
+    <%= link_to 'Semester 4', subjects_path(:semester_info => '4'), :class => "btn btn-default" %>
+    <%= link_to 'Semester 5', subjects_path(:semester_info => '5'), :class => "btn btn-default" %>
+    <%= link_to 'Semester 6', subjects_path(:semester_info => '6'), :class => "btn btn-default" %>
+    <%= link_to 'AWE', subjects_path(:semester_info => 'AWE'), :class => "btn btn-default" %>
   </div>
 
 

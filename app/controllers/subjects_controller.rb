@@ -14,8 +14,7 @@ class SubjectsController < ApplicationController
         order(subject_search_term.order)
     else
       if params[:semester_info]
-        @semester_info = Subject.find(params[:semester_info])
-        @subjects = Subject.where(semester_info: @semester_info)
+        @subjects = Subject.where(semester_info: params[:semester_info])
       else
         @subjects = Subject.all
       end
