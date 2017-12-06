@@ -7,7 +7,7 @@ describe 'S002: User can filter subjects by semester' do
   it 'links to specific subject overview' do
     visit subjects_path
 
-    click_button('Semester 1')
+    click_link('Semester 1')
     
     expect(page).to have_content('Fun with Angular')
     expect(page).to have_no_content('Fun with React')
