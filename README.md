@@ -1,4 +1,4 @@
-# IMI CourseR
+# IMI CourseR ![Build status](https://travis-ci.com/georgdonner/courseR.svg?token=8pdsmK1vvcQXqZ5rRdTq&branch=master)
 
 Look for IMI courses and see how other people liked them.
 
