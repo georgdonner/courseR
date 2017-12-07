@@ -2,8 +2,15 @@ sudo: required
 services:
 - docker
 before_script:
-  - sudo /etc/init.d/postgresql stop
-  - docker-compose build
-  - docker-compose run web bundle exec rails db:test:prepare
+- sudo /etc/init.d/postgresql stop
+- docker-compose build
+- docker-compose run web bundle exec rails db:test:prepare
 script:
-  - docker-compose run web rspec
+- docker-compose run web rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: d5/uZ0/HhQc8+iMjEfomfjMTn0uVrUOgu1wNRTroCxOsxIHkQwFUxVdIqFT+w3XCNU1XUoQSf3UUrZNpI+IID6la64CwBuucTEZRkWob5YBuYIrhuSdXqh/wAyOrWvP3CqUffNZDAGXh7oWzJmpGdX7IEtjjYxbRlgQSZKGt7qrBxyjfeXxoCNe6YAD5Bb26Xl3NK3Ni7CKh/037Bv+olBPodoojJJ+JBar/ZCCLxAhdkJSEA2YZwQXib7WC6xW+7MSrVtfPZmDJjxJR1q3JJ7toIX1M8LBJwMrCQsrpB5PI0n3qKPNbThpAZt7dEjoiFQ9l1KtFuFeH0VCiPk/gc0cIVaNGA8imyErfVqwW9KY1RD6yQTD/fRSD7Mq5cD0JslN0+BMHKqqfO+qsFZRa3pOQpLezatFMiAmXgP51qZaB1tH5Ix6rCF4AFDfc9Pq1EBcI0Hg8/JyatoDO7KXU180V3aXnWxbE8Wm3UPg8sXXATOxT3bltjKWGz7NCw0jwFwQXUKshk4deT++u87OHgtXlbVJUX5rNTjYdrqCEtwojeKjD67AZqWxOQbVlaRoEGXe6wWixI618Dgh5mYJwmrldKW5j+DrxzhvHQEnwRBC0GFBBJ6kgPVruuIhTD702nB7ikBSA9DRObULe4zri7UDjp+JnaKHqUujXypftZc0=
+  app: imi-courses
+  run:
+    - "rake db:migrate"
