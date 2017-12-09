@@ -6,3 +6,4 @@ COPY Gemfile /courseR/Gemfile
 COPY Gemfile.lock /courseR/Gemfile.lock
 RUN bundle install
 COPY . /courseR
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
