@@ -1,18 +1,29 @@
 require 'rails_helper'
 describe 'S009: Validates lecturer' do
-  before :each do
-    user = User.create(name: 'fakelecturer', role: 'Lecturer' email: 'fake@fink.de', password: 'geheim', password_confirmation: 'geheim')
-  end
   
-  it 'creates no lecturer user' do
+  it 'creates valid lecturer user' do
     visit 'users/sign_up'
 
-    fill_in 'name', with: 'fakelecturer'
-    fill_in 'role', with: 'Lecturer'
-    fill_in 'email', with: 'fake@fink.de'
-    fill_in 'password', with: 'geheim'
-    fill_in 'password_confirmation', with: 'geheim'
+	fill_in('Name', :with => 'Kleinen')
+	fill_in('Role', :with => 'lecturer')
+	fill_in('Email', :with => 'wi@test.de')
+	fill_in('Password', :with => 'hilfehilfe')
+	fill_in('Password confirmation', :with => 'hilfehilfe')
+	click_button('Sign up')
 
     expect(page).to have_content("Subjects")
+  end
+
+  it 'does not create lecturer user' do
+    visit 'users/sign_up'
+
+	fill_in('Name', :with => 'kli')
+	fill_in('Role', :with => 'lecturer')
+	fill_in('Email', :with => 'wi@test.de')
+	fill_in('Password', :with => 'hilfehilfe')
+	fill_in('Password confirmation', :with => 'hilfehilfe')
+	click_button('Sign up')
+
+    expect(page).to have_content("not found")
   end
 end
