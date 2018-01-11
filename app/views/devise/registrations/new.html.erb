@@ -3,27 +3,73 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, class: "form-control", onchange: "validateLecturer()" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
+    <%= f.label :role %><br />
+    <%= f.text_field :role, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
+</br>
+
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "btn btn-primary btn-lg", id: "submit_registration" %>
   </div>
 <% end %>
+
+<script>
+  validateLecturer = () => {
+    $('#lecturer_status').remove();
+    const lecturer = $('#user_name').val();
+    const inputSplit = lecturer.trim().split(' ');
+    if (inputSplit.length !== 2) {
+      return $('<span style="color:red" id="lecturer_status">Invalid format. Please provide first and last name.</span>').insertAfter('#user_name');
+    }
+    $('#submit_registration').prop('disabled', true);
+    $('<span id="lecturer_loading">Checking Lecturer...</span>').insertAfter('#user_name');
+    $.ajax({
+      url: `https://cors-anywhere.herokuapp.com/https://lsf.htw-berlin.de/qisserver/rds?state=wsearchv&search=7&purge=y&moduleParameter=person/person&personal.vorname=${inputSplit[0]}&personal.nachname=${inputSplit[1]}&P_start=0&P_anzahl=10&_form=display`,
+    })
+      .done((html) => {
+        let validLecturer = false;
+        $(html).find('.ver').each(function() {
+          let linkText = $(this).text();
+          const regex = new RegExp(`\\b(${inputSplit[0]})\\s+(${inputSplit[1]})\\b`, 'i');
+          if (regex.exec(linkText) !== null) {
+            validLecturer = true;
+          }
+        });
+        $('#lecturer_loading').remove();
+        if (validLecturer) {
+          $('#submit_registration').prop('disabled', false);
+        } else {
+          const error = `Lecturer ${lecturer} not found.`;
+          $('#submit_registration').prop('disabled', true);
+          $(`<span style="color: red" id="lecturer_status">${error}</span>`).insertAfter('#user_name');
+        }
+      });
+  };
+</script>
 
 <%= render "devise/shared/links" %>
