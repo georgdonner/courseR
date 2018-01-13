@@ -37,6 +37,15 @@ class CoursesController < ApplicationController
     end
   end
 
+  def isNewCourseAvailable
+    if user_signed_in?
+      puts current_user
+      @isVisible = true
+    end
+    @isVisible = false
+
+  end
+
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update

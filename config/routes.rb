@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :courses, only: [ :index ]
+  resources :courses, only: [ :index, :show, :new, :delete, :edit ]
   resources :lecturers, only: [ :index ]
   resources :subjects, only: [ :index, :show ]
   root 'subjects#index'

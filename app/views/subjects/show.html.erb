@@ -24,4 +24,8 @@
     <% end %>
     </br>
   </div>
+
+  <% if @isVisible %>
+    <%= link_to 'New Course', new_course_path %>
+  <% end %>
 </div>

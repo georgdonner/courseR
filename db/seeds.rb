@@ -11,6 +11,7 @@ Subject.destroy_all()
 Course.destroy_all()
 
 test = User.create(email: 'test@test.de',password:'testtesttest',password_confirmation:'testtesttest', role: 'student', name: 'test user')
+juleUser = User.create(email: 'jule@fink.de',password:'test',password_confirmation:'test', role: 'lecturer', name: 'Juliane Fink')
 
 jule = Lecturer.create(title: 'Prof. Dr.', name: 'Juliane Fink', email: 'jule@fink.de')
 julius = Lecturer.create(title: 'Prof.', name: 'Julius Deckert', email: 'julius@deckert.de')
