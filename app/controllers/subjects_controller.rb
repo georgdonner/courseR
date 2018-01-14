@@ -21,22 +21,28 @@ class SubjectsController < ApplicationController
         @subjects = Subject.all
       end
     end
-    puts LsfAdapter.get_awe_courses
   end
 
   def isNewCourseAvailable
     @visible = false
-    if user_signed_in?
+    @is_subject_awe = is_awe
+    if user_signed_in? && @is_subject_awe
       @visible = true
     end
   end
 
+  def is_awe
+    @this_subject = Subject.where(id: params[:id])
+    @is_awe = @this_subject.first.semester_info === 'AWE'
+  end
   # GET /subjects/1
   # GET /subjects/1.json
   def show
     @courses = @subject.courses
     @selected_course = @courses.first
     @isVisible = isNewCourseAvailable
+    @is_awe = is_awe
+    @subject = @subject
   end
 
   # GET /subjects/new

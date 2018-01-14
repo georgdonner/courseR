@@ -15,6 +15,20 @@ class CoursesController < ApplicationController
   # GET /courses/new
   def new
     @course = Course.new
+    @form_type = 'free'
+    if params[:is_AWE]
+      @form_type = 'awe'
+      @awes = LsfAdapter.get_awe_courses
+      if params[:subject_id]
+        @subject_name = Subject.where(id: params[:subject_id]).first.name
+        @lecturer = get_user_lecturer
+      end
+    end
+  end
+
+  def get_user_lecturer
+    @user_email = current_user.attributes['email']
+    @lecturer = Lecturer.where(email: @user_email)
   end
 
   # GET /courses/1/edit
@@ -25,7 +39,6 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
@@ -35,15 +48,6 @@ class CoursesController < ApplicationController
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def isNewCourseAvailable
-    if user_signed_in?
-      puts current_user
-      @isVisible = true
-    end
-    @isVisible = false
-
   end
 
   # PATCH/PUT /courses/1
