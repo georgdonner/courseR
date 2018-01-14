@@ -12,18 +12,19 @@ class CoursesController < ApplicationController
   def show
   end
 
+  def isNewCourseAvailable
+    @visible = false
+    puts current_user.role
+    @is_user_lecturer = current_user.role === 'lecturer'
+    if user_signed_in? && @is_user_lecturer
+      @visible = true
+    end
+  end
+
   # GET /courses/new
   def new
     @course = Course.new
-    @form_type = 'free'
-    if params[:is_AWE]
-      @form_type = 'awe'
-      @awes = LsfAdapter.get_awe_courses
-      if params[:subject_id]
-        @subject_name = Subject.where(id: params[:subject_id]).first.name
-        @lecturer = get_user_lecturer
-      end
-    end
+    @lecturer = get_user_lecturer
   end
 
   def get_user_lecturer
