@@ -2,7 +2,7 @@ require_relative '../../lib/lsf_adapter.rb'
 
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :show, :new]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   # GET /subjects
   # GET /subjects.json
@@ -41,6 +41,7 @@ class SubjectsController < ApplicationController
   def show
     @courses = @subject.courses
     @selected_course = @courses.first
+    @subject = @subject
     @isVisible = is_new_subject_course_available
   end
 

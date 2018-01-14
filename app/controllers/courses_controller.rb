@@ -25,6 +25,9 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     @lecturer = get_user_lecturer
+    if params[:subject_id]
+      @subject = Subject.where(id: params[:subject_id])
+    end
   end
 
   def get_user_lecturer
