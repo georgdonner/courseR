@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-
+  before_action :require_lecturer_courses, only: [:new, :edit, :update, :destroy]
 
   # GET /courses
   # GET /courses.json
@@ -75,6 +75,15 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def require_lecturer_courses
+    if user_signed_in?
+      if current_user.role != 'lecturer'
+        flash[:error] = 'You must be a lecturer to create, edit or destroy a course.'
+        redirect_to 'subjects#index'
+      end
     end
   end
 

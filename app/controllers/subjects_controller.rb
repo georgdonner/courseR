@@ -2,6 +2,7 @@ require_relative '../../lib/lsf_adapter.rb'
 
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :require_lecturer, only: [:new, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   # GET /subjects
@@ -100,6 +101,15 @@ class SubjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to subjects_url, notice: 'Subject was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def require_lecturer
+    if user_signed_in?
+      if current_user.role != 'lecturer'
+        flash[:error] = 'You must be a lecturer to create, edit or destroy a subject.'
+        redirect_to 'subjects#index'
+      end
     end
   end
 
