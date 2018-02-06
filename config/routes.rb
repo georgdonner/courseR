@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :courses, only: [ :index ]
+  resources :courses, only: [ :index, :show, :new ]
   resources :lecturers, only: [ :index ]
-  resources :subjects, only: [ :index, :show ]
+  resources :subjects, only: [ :index, :show, :new ]
   root 'subjects#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

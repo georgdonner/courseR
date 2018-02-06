@@ -16,17 +16,33 @@
     <%= form.text_area :description, id: :course_description %>
   </div>
 
-  <div class="field">
-    <%= form.label :lecturer %><br />
-    <%= form.select :lecturer_id, options_from_collection_for_select(Lecturer.all, "id", "name"),
-      :prompt => "Select lecturer" %>
-  </div>
+  <% if @lecturer %>
+    <div class="field">
+      <%= form.label :lecturer %><br />
+      <%= form.select :lecturer_id, options_from_collection_for_select(@lecturer, "id", "name"),
+        :prompt => "Select lecturer" %>
+    </div>
+  <%else%>
+    <div class="field">
+      <%= form.label :lecturer %><br />
+      <%= form.select :lecturer_id, options_from_collection_for_select(Lecturer.all, "id", "name"),
+        :prompt => "Select lecturer" %>
+    </div>
+  <% end %>
 
-  <div class="field">
+  <% if @subject %>
+    <div class="field">
+      <%= form.label :subject %><br />
+      <%= form.select :subject_id, options_from_collection_for_select(@subject, "id", "name"),
+        :prompt => "Select subject" %>
+    </div>
+  <%else%>
+    div class="field">
     <%= form.label :subject %><br />
     <%= form.select :subject_id, options_from_collection_for_select(Subject.all, "id", "name"),
       :prompt => "Select subject" %>
   </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

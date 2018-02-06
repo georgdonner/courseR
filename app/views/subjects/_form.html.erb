@@ -12,13 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name %><br />
+    <%= form.select(:name, @awes.map { |awe_title| [ awe_title, awe_title ] }) %>
+    </br>
     <%= form.text_field :name, id: :subject_name %>
   </div>
+  </br>
 
   <div class="field">
     <%= form.label :study_path %>
     <%= form.text_field :study_path, id: :subject_study_path %>
+  </div>
+
+  <div class="field">
+    <%= form.label :semester_info %>
+    <%= form.text_field :semester_info, id: :semester_info %>
   </div>
 
   <div class="actions">

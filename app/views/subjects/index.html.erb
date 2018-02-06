@@ -51,5 +51,7 @@
   </section>
 
   <br>
-
+  <% if @isVisible %>
+    <%= link_to 'New Subject', new_subject_path %>
+  <% end %>
 </div>

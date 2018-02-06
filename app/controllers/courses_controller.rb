@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-
+  before_action :require_lecturer_courses, only: [:new, :edit, :update, :destroy]
 
   # GET /courses
   # GET /courses.json
@@ -12,9 +12,27 @@ class CoursesController < ApplicationController
   def show
   end
 
+  def isNewCourseAvailable
+    @visible = false
+    puts current_user.role
+    @is_user_lecturer = current_user.role === 'lecturer'
+    if user_signed_in? && @is_user_lecturer
+      @visible = true
+    end
+  end
+
   # GET /courses/new
   def new
     @course = Course.new
+    @lecturer = get_user_lecturer
+    if params[:subject_id]
+      @subject = Subject.where(id: params[:subject_id])
+    end
+  end
+
+  def get_user_lecturer
+    @user_email = current_user.attributes['email']
+    @lecturer = Lecturer.where(email: @user_email)
   end
 
   # GET /courses/1/edit
@@ -25,7 +43,6 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
@@ -58,6 +75,15 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def require_lecturer_courses
+    if user_signed_in?
+      if current_user.role != 'lecturer'
+        flash[:error] = 'You must be a lecturer to create, edit or destroy a course.'
+        redirect_to 'subjects#index'
+      end
     end
   end
 
