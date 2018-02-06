@@ -1,0 +1,32 @@
+<%= form_with(model: rating, local: true) do |form| %>
+  <% if rating.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
+
+      <ul>
+      <% rating.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :praxis %>
+    <%= form.text_field :praxis, id: :rating_praxis %>
+  </div>
+
+  <div class="field">
+    <%= form.label :difficulty %>
+    <%= form.text_field :difficulty, id: :rating_difficulty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :homework %>
+    <%= form.text_field :homework, id: :rating_homework %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

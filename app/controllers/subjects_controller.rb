@@ -37,6 +37,24 @@ class SubjectsController < ApplicationController
     end
   end
 
+  def calculate_ratings
+    @subject = @subject
+    @ratings = Hash.new
+    @subject.courses.each do |course|
+      course.ratings.each do |rating|
+        @results = Hash[:difficulty, 0, :homework, 0, :praxis, 0]
+        @prev_difficulty = @results[:difficulty]
+        @results[:difficulty] = (@prev_difficulty + rating.difficulty)/2
+        @prev_homework = @results[:homework]
+        @results[:homework] = (@prev_homework + rating.homework)/2
+        @prev_praxis = @results[:praxis]
+        @results[:praxis] = (@prev_praxis + rating.praxis)/2
+      end
+      @ratings[course] = @results
+    end
+    @ratings
+  end
+
   # GET /subjects/1
   # GET /subjects/1.json
   def show
@@ -44,6 +62,7 @@ class SubjectsController < ApplicationController
     @selected_course = @courses.first
     @subject = @subject
     @isVisible = is_new_subject_course_available
+    @ratings = calculate_ratings
   end
 
   # GET /subjects/new
