@@ -20,18 +20,20 @@
       <div class="tab-pane <%= is_active(course) %>" id="<%= course.id %>" role="tabpanel" aria-labelledby="<%= generate_tab_id(course) %>">
         <h3 class="mt-5 mb-2">Description </h3>
         <p><%= course.description %></p>
-        <h3 class="mt-5 mb-2">Rating </h3>
-        <div class="ml-3">
-          <% @ratings[course].each do |key, value| %>
-            <% @this_value = (value*100).round(2) %>
-            <p class="mt-3"><%= key.capitalize %> </p>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: <%= @this_value %>%;" aria-valuenow="<%= @this_value %>" aria-valuemin="0" aria-valuemax="100">
-                <%= @this_value %>
+        <% if @ratings && @ratings[course] %>
+          <h3 class="mt-5 mb-2">Rating </h3>
+          <div class="ml-3">
+            <% @ratings[course].each do |key, value| %>
+              <% @this_value = (value*100).round(2) %>
+              <p class="mt-3"><%= key.capitalize %> </p>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: <%= @this_value %>%;" aria-valuenow="<%= @this_value %>" aria-valuemin="0" aria-valuemax="100">
+                  <%= @this_value %>
+                </div>
               </div>
-            </div>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     <% end %>
     </br>
